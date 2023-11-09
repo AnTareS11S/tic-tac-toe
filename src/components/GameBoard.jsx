@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 
 const initialGameBoard = [
@@ -5,7 +6,7 @@ const initialGameBoard = [
   [null, null, null],
   [null, null, null],
 ];
-const GameBoard = () => {
+const GameBoard = ({ onSelectSquare, activePlayerSymbol }) => {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   const handleSelectSquare = (rowIndex, colIndex) => {
@@ -13,9 +14,10 @@ const GameBoard = () => {
       const updatedBoard = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
-      updatedBoard[rowIndex][colIndex] = 'X';
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+    onSelectSquare();
   };
 
   return (
